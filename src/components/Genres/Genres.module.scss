@@ -1,0 +1,23 @@
+@import "../../styles/globals.scss";
+
+.genres {
+  display: flex;
+  column-gap: toRem(30);
+  border-bottom: toRem(1) solid #080707;
+  box-shadow: inset 0 -(toRem(2)) 0 #424242;
+  margin-top: toRem(30);
+
+  &__button {
+    color: #ffffff;
+    background: none;
+    cursor: pointer;
+    border: none;
+    padding: 0 0 toRem(20) 0;
+    border-bottom: toRem(2) solid #424242;
+
+    &--selected,
+    &:hover {
+      border-bottom: toRem(2) solid #F65261;
+    }
+  }
+}
