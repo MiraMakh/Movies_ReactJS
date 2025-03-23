@@ -22,7 +22,7 @@ const App: React.FC = () => {
       {React.createElement(Counter, { initialValue: 10 })}
 
       <SearchForm
-        initialSearchQuery="Initial search Value"
+        initialSearchQuery="Initial search value"
         onSearch={handleSearch}
       />
 

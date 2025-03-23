@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Jest coverage reports
+coverage/
+
+# Jest coverage reports
+cypress/downloads
+cypress/fixtures
+cypress/support
