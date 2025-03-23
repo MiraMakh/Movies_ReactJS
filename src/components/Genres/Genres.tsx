@@ -1,20 +1,17 @@
-import React from "react";
 import styles from "./Genres.module.scss";
+import { GenresProps } from "../../models";
+import clsx from "clsx";
 
-const Genres: React.FC<{
-  genres: string[];
-  selectedGenre: string;
-  onSelect: (genre: string) => void;
-}> = ({ genres, selectedGenre, onSelect }) => {
+const Genres = ({ genres, selectedGenre, onSelect }: GenresProps) => {
   return (
     <div className={styles["genres"]}>
       {genres.map((genre) => (
         <button
           key={genre}
           onClick={() => onSelect(genre)}
-          className={`${styles["genres__button"]} ${
-            selectedGenre === genre ? styles["genres__button--selected"] : null
-          }`}
+          className={clsx(styles["genres__button"], {
+            [styles["genres__button--selected"]]: selectedGenre === genre,
+          })}
         >
           {genre}
         </button>

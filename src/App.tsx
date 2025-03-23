@@ -15,7 +15,6 @@ const App: React.FC = () => {
   const [selectedGenre, setSelectedGenre] = useState<string>(genres[0]);
   const handleGenreSelect = (genre: string) => {
     setSelectedGenre(genre);
-    console.log("Selected Genre:", genre);
   };
 
   return (
@@ -23,7 +22,7 @@ const App: React.FC = () => {
       {React.createElement(Counter, { initialValue: 10 })}
 
       <SearchForm
-        InitialSearchQuery="Initial search Value"
+        initialSearchQuery="Initial search Value"
         onSearch={handleSearch}
       />
 
