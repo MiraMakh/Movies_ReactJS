@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styles from "./SearchForm.module.scss";
-import { SearchFormProps } from "../../models";
+import React, { useState } from 'react';
+import styles from './SearchForm.module.scss';
+import { SearchFormProps } from '../../models';
 
 const SearchForm = ({ initialSearchQuery, onSearch }: SearchFormProps) => {
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
@@ -18,17 +18,17 @@ const SearchForm = ({ initialSearchQuery, onSearch }: SearchFormProps) => {
 
   return (
     <form>
-      <div className={styles["search"]}>
+      <div className={styles['search']}>
         <input
           type="text"
           value={searchQuery}
           onChange={handleInputChange}
           placeholder="What do you want to watch?"
-          className={styles["search__input"]}
+          className={styles['search__input']}
         />
         <button
           onClick={handleSearchClick}
-          className={styles["search__button"]}
+          className={styles['search__button']}
         >
           Search
         </button>

@@ -1,4 +1,4 @@
-@import "../../styles/globals.scss";
+@import '../../styles/globals.scss';
 
 .genres {
   display: flex;
@@ -17,7 +17,7 @@
 
     &--selected,
     &:hover {
-      border-bottom: toRem(2) solid #F65261;
+      border-bottom: toRem(2) solid #f65261;
     }
   }
 }

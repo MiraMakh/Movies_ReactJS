@@ -1,6 +1,6 @@
-import React from "react";
-import counter from "./Counter.module.scss";
-import { CounterProps, CounterState } from "../../models";
+import React from 'react';
+import counter from './Counter.module.scss';
+import { CounterProps, CounterState } from '../../models';
 
 class Counter extends React.Component<CounterProps, CounterState> {
   constructor(props: CounterProps) {
@@ -24,25 +24,25 @@ class Counter extends React.Component<CounterProps, CounterState> {
 
   render() {
     return React.createElement(
-      "div",
+      'div',
       { className: counter.container },
       React.createElement(
-        "button",
+        'button',
         {
           onClick: this.decrement,
           className: counter.button,
         },
-        "-"
+        '-'
       ),
       React.createElement(
-        "span",
+        'span',
         { className: counter.value },
         this.state.value
       ),
       React.createElement(
-        "button",
+        'button',
         { onClick: this.increment, className: counter.button },
-        "+"
+        '+'
       )
     );
   }

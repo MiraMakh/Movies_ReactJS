@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import Counter from "./components/Counter/Counter";
-import SearchForm from "./components/SearchForm/SearchForm";
-import Genres from "./components/Genres/Genres";
-import "./App.scss";
+import React, { useState } from 'react';
+import { Counter, SearchForm, Genres } from './components';
+import './App.scss';
 
 const App: React.FC = () => {
   // @TODO Add layout components and move SearchForm and Genres in their components
@@ -11,7 +9,7 @@ const App: React.FC = () => {
     // @TODO search logic here
   };
 
-  const genres = ["All", "Documentary", "Comedy", "Horror", "Crime"];
+  const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
   const [selectedGenre, setSelectedGenre] = useState<string>(genres[0]);
   const handleGenreSelect = (genre: string) => {
     setSelectedGenre(genre);
@@ -22,7 +20,7 @@ const App: React.FC = () => {
       {React.createElement(Counter, { initialValue: 10 })}
 
       <SearchForm
-        initialSearchQuery="Initial search Value"
+        initialSearchQuery="Initial search value"
         onSearch={handleSearch}
       />
 
