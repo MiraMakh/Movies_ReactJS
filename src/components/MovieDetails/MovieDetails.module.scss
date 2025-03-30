@@ -1,0 +1,43 @@
+@import '../../styles/globals.scss';
+
+.movieDetails {
+  display: flex;
+  gap: toRem(58);
+  align-items: flex-start;
+
+  &__poster {
+    flex: 1;
+    min-width: toRem(323);
+
+    &__image {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: toRem(10);
+    color: #333;
+  }
+
+  &__meta {
+    font-size: 16px;
+    color: #757575;
+    margin-bottom: toRem(28);
+  }
+
+  &__description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+  }
+}
