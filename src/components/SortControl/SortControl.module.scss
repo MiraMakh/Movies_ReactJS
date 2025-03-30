@@ -1,0 +1,30 @@
+@import '../../styles/globals.scss';
+
+.sortControl {
+  display: flex;
+  align-items: center;
+  gap: toRem(10);
+}
+
+.sortControl__label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.sortControl__select {
+  padding: toRem(5) toRem(10);
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  color: #333;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
