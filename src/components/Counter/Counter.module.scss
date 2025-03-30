@@ -1,0 +1,35 @@
+@import "../../styles/globals.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  column-gap: toRem(15);
+  max-width: toRem(130);
+  padding: toRem(20);
+  border: toRem(1) solid rgb(180, 52, 219);
+  margin: 0 auto;
+}
+
+.value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: toRem(30);
+  font-size: toRem(20);
+  font-weight: bold;
+  color: rgb(180, 52, 219);
+}
+
+.button {
+  padding: toRem(10) toRem(15);
+  font-size: 16px;
+  color: #fff;
+  background-color: rgb(180, 52, 219);
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #b92978;
+  }
+}
