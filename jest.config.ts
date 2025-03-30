@@ -6,10 +6,10 @@ const config: Config = {
     "^.+\\.tsx?$": "ts-jest",
   },
   moduleNameMapper: {
-    '\\.scss$': 'identity-obj-proxy'
+    "\\.scss$": "identity-obj-proxy",
   },
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  testRegex: "(/__tests__/.*|(\\.|/)(spec))\\.tsx?$",
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.{ts,tsx}"],

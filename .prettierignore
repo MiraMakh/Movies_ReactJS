@@ -1,0 +1,15 @@
+# Ignore build artifacts
+node_modules/
+dist/
+build/
+
+# Ignore log files
+*.log
+
+# Ignore configuration and lock files
+package-lock.json
+yarn.lock
+*.config.js
+
+# Ignore other files
+coverage/

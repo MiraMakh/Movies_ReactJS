@@ -30,4 +30,3 @@ coverage/
 # Jest coverage reports
 cypress/downloads
 cypress/fixtures
-cypress/support

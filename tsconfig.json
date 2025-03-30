@@ -3,13 +3,26 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ESNext",
+    "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
-    "types": ["jest"],
+    "types": [
+      "node",
+      "@types/react",
+      "@types/react-dom",
+      "jest",
+      "cypress",
+      "@testing-library/cypress"
+    ],
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

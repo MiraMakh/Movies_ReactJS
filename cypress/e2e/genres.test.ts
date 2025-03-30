@@ -9,7 +9,10 @@ describe("Genres Component", () => {
 
     cy.contains("All").click();
 
-    /* TODO: fix in future why this class check fails */
-    cy.contains("All").should("have.class", "genres__button--selected");
+    cy.findByText(/All/i).should(($s) => {
+      expect($s).to.have.length(1);
+      const className = $s[0].className;
+      expect(className).to.match(/genres__button--selected/gi);
+    });
   });
 });
