@@ -30,3 +30,4 @@ coverage/
 # Jest coverage reports
 cypress/downloads
 cypress/fixtures
+*storybook.log
