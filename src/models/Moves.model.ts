@@ -15,6 +15,6 @@ export interface MovieDetailsProps {
   title: string;
   releaseYear: number;
   rating: number;
-  duration: string;
+  duration: string; /* @TODO: change with number when BE will be added */
   description: string;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
 import styles from './MovieTile.module.scss';
 import { MovieTileProps } from '../../models';
 
@@ -32,12 +31,7 @@ const MovieTile = ({
   };
 
   return (
-    <div
-      className={clsx(styles.movieTile, {
-        [styles.movieTile__active]: isActive,
-      })}
-      onClick={() => onClick(id)}
-    >
+    <div className={styles.movieTile} onClick={() => onClick(id)}>
       <img src={imageUrl} alt={title} className={styles.movieTile__image} />
       <div className={styles.movieTile__info}>
         <h3 className={styles.movieTile__title}>{title}</h3>
@@ -46,6 +40,7 @@ const MovieTile = ({
         </p>
       </div>
       <button
+        type="button"
         className={styles.movieTile__menuButton}
         onClick={toggleContextMenu}
       >

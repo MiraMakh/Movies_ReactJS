@@ -8,6 +8,8 @@ describe('SortControl Component', () => {
     onChange: jest.fn(),
   };
 
+  /* @TODO: I would also check that the dropdown behaves correctly, i.d. calls onChange with a chosen value. */
+
   it('should render label and select dropdown', () => {
     render(<SortControl {...defaultProps} />);
 

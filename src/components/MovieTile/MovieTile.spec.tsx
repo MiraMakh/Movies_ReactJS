@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import MovieTile from './MovieTitle';
+import MovieTile from './MovieTile';
 import { MovieTileProps } from '../../models';
 import userEvent from '@testing-library/user-event';
 import { movies } from '../../constants';
@@ -55,7 +55,7 @@ describe('MovieTile Component', () => {
     expect(screen.queryByText('Delete')).not.toBeInTheDocument();
   });
 
-  it('should handle Edit and Delete callbacks', async () => {
+  it('should handle Edit callback', async () => {
     const mockOnEdit = jest.fn();
     const mockOnDelete = jest.fn();
 
@@ -67,13 +67,28 @@ describe('MovieTile Component', () => {
       />
     );
 
-    /* @TODO: fix this test fails */
     const menuButton = screen.getByText('...');
     await userEvent.click(menuButton);
 
     const editButton = screen.getByText('Edit');
     await userEvent.click(editButton);
     expect(mockOnEdit).toHaveBeenCalledWith(movie.id);
+  });
+
+  it('should handle Delete callback', async () => {
+    const mockOnEdit = jest.fn();
+    const mockOnDelete = jest.fn();
+
+    render(
+      <MovieTile
+        {...defaultProps}
+        onEdit={mockOnEdit}
+        onDelete={mockOnDelete}
+      />
+    );
+
+    const menuButton = screen.getByText('...');
+    await userEvent.click(menuButton);
 
     const deleteButton = screen.getByText('Delete');
     await userEvent.click(deleteButton);
