@@ -3,18 +3,18 @@ import { MovieDetailsProps } from '../../models';
 
 /* @TODO: make proper styles */
 const MovieDetails = ({
-  imageUrl,
+  poster_path,
   title,
-  releaseYear,
-  rating,
-  duration,
-  description,
+  release_date,
+  vote_average,
+  runtime,
+  overview,
 }: MovieDetailsProps) => {
   return (
     <div className={styles.movieDetails}>
       <div className={styles.movieDetails__poster}>
         <img
-          src={imageUrl}
+          src={poster_path}
           alt={title}
           className={styles.movieDetails__image}
         />
@@ -22,10 +22,10 @@ const MovieDetails = ({
       <div className={styles.movieDetails__info}>
         <h1 className={styles.movieDetails__title}>{title}</h1>
         <div className={styles.movieDetails__meta}>
-          <span>{releaseYear}</span> ・ <span>{duration}</span> ・{' '}
-          <span>{rating}/10</span>
+          <span>{release_date}</span> ・ <span>{runtime}</span> ・{' '}
+          <span>{vote_average}/10</span>
         </div>
-        <p className={styles.movieDetails__description}>{description}</p>
+        <p className={styles.movieDetails__description}>{overview}</p>
       </div>
     </div>
   );

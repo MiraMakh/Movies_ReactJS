@@ -27,6 +27,7 @@ const SearchForm = ({ initialSearchQuery, onSearch }: SearchFormProps) => {
           className={styles['search__input']}
         />
         <button
+          type="submit"
           onClick={handleSearchClick}
           className={styles['search__button']}
         >

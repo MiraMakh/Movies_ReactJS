@@ -4,9 +4,9 @@ import { MovieTileProps } from '../../models';
 
 const MovieTile = ({
   id,
-  imageUrl,
+  poster_path,
   title,
-  releaseYear,
+  release_date,
   genres,
   onClick,
   onEdit,
@@ -32,11 +32,11 @@ const MovieTile = ({
 
   return (
     <div className={styles.movieTile} onClick={() => onClick(id)}>
-      <img src={imageUrl} alt={title} className={styles.movieTile__image} />
+      <img src={poster_path} alt={title} className={styles.movieTile__image} />
       <div className={styles.movieTile__info}>
         <h3 className={styles.movieTile__title}>{title}</h3>
         <p className={styles.movieTile__yearGenres}>
-          {releaseYear} ・ {genres.join(', ')}
+          {release_date} ・ {Array.isArray(genres) ? genres.join(', ') : genres}
         </p>
       </div>
       <button
@@ -48,8 +48,8 @@ const MovieTile = ({
       </button>
       {isContextMenuOpen && (
         <div className={styles.movieTile__contextMenu}>
-          <button onClick={handleEditClick}>Edit</button>
-          <button onClick={handleDeleteClick}>Delete</button>
+          <button type="button" onClick={handleEditClick}>Edit</button>
+          <button type="button" onClick={handleDeleteClick}>Delete</button>
         </div>
       )}
     </div>
