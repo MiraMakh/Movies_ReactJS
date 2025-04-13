@@ -4,3 +4,7 @@ export { default as SearchForm } from './SearchForm/SearchForm';
 export { default as MovieTile } from './MovieTile/MovieTile';
 export { default as MovieDetails } from './MovieDetails/MovieDetails';
 export { default as SortControl } from './SortControl/SortControl';
+export { default as Dialog } from './Dialog/Dialog';
+export { default as MovieForm } from './MovieForm/MovieForm';
+export { default as AddMovie } from './AddMovie/AddMovie';
+export { default as EditMovie } from './EditMovie/EditMovie';

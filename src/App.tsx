@@ -6,6 +6,7 @@ import {
   MovieTile,
   MovieDetails,
   SortControl,
+  AddMovie,
 } from './components';
 import './App.scss';
 import { genres, movies } from './constants';
@@ -49,6 +50,10 @@ const App: React.FC = () => {
     // @TODO movie delete logic here
   };
 
+  const handleAddMovie = (movie: MovieDetailsProps) => {
+    // @TODO movie add logic here
+  };
+
   const handleSortChange = (newValue: string) => {
     setSortBy(newValue);
   };
@@ -60,6 +65,8 @@ const App: React.FC = () => {
 
   return (
     <>
+      <AddMovie onSubmit={handleAddMovie} />
+
       {React.createElement(Counter, { initialValue: 10 })}
 
       <SearchForm

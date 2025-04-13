@@ -17,8 +17,10 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "focus-trap-react": "^11.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-portal": "^4.3.0",
     "sass": "^1.85.1"
   },
   "devDependencies": {
@@ -38,6 +40,7 @@
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@types/react-portal": "^4.0.7",
     "@types/react-test-renderer": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
