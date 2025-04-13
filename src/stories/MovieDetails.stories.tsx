@@ -9,29 +9,29 @@ const meta: Meta<typeof MovieDetails> = {
     layout: 'centered',
   },
   argTypes: {
-    imageUrl: {
+    poster_path: {
       control: { type: 'text' },
-      description: 'Poster image of the movie',
+      overview: 'Poster image of the movie',
     },
     title: {
       control: { type: 'text' },
-      description: 'Title of the movie',
+      overview: 'Title of the movie',
     },
-    releaseYear: {
+    release_date: {
       control: { type: 'number' },
-      description: 'The year the movie was released',
+      overview: 'The year the movie was released',
     },
-    rating: {
+    vote_average: {
       control: { type: 'number' },
-      description: 'Movie rating out of 10',
+      overview: 'Movie vote_average out of 10',
     },
-    duration: {
-      control: { type: 'text' },
-      description: 'Movie duration in hours and minutes',
+    runtime: {
+      control: { type: 'number' },
+      overview: 'Movie runtime in hours and minutes',
     },
-    description: {
+    overview: {
       control: { type: 'text' },
-      description: 'Brief description of the movie',
+      overview: 'Brief overview of the movie',
     },
   },
 };
@@ -43,12 +43,12 @@ type Story = StoryObj<MovieDetailsProps>;
 // Default Story
 export const Default: Story = {
   args: {
-    imageUrl: `./src/assets/Bitmap.png`,
+    poster_path: `./src/assets/Bitmap.png`,
     title: 'Movie title',
-    rating: 8.8,
-    duration: '2h 34min',
-    releaseYear: 2010,
-    description:
+    vote_average: 8.8,
+    runtime: 128,
+    release_date: 2010,
+    overview:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
   },
 };
@@ -56,12 +56,12 @@ export const Default: Story = {
 // Long Description Story
 export const LongDescription: Story = {
   args: {
-    imageUrl: `./src/assets/Bitmap.png`,
+    poster_path: `./src/assets/Bitmap.png`,
     title: 'Movie title',
-    rating: 8.8,
-    duration: '2h 34min',
-    releaseYear: 2010,
-    description:
+    vote_average: 8.8,
+    runtime: 128,
+    release_date: 2010,
+    overview:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
   },
 };

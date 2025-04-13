@@ -1,9 +1,9 @@
 export interface MovieTileProps {
   id: number;
-  imageUrl: string;
+  poster_path: string;
   title: string;
-  releaseYear: number;
-  genres: string[];
+  release_date: number;
+  genres: string[] | string;
   onClick: (id: number) => void;
   onEdit?: (id: number) => void;
   onDelete?: (id: number) => void;
@@ -11,13 +11,14 @@ export interface MovieTileProps {
 }
 
 export interface MovieDetailsProps {
-  imageUrl: string;
+  id: number;
+  poster_path: string;
   title: string;
-  genre?: string;
-  releaseYear: number;
-  rating: number;
-  duration: string /* @TODO: change with number when BE will be added */;
-  description: string;
+  genres: string;
+  release_date: number;
+  vote_average: number;
+  runtime: number;
+  overview: string;
 }
 
 export interface MovieFormProps {
