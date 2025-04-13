@@ -20,7 +20,12 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
     },
     rules: {
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "lf"
+        }
+      ],
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
