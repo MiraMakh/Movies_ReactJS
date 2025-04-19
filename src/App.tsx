@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Counter,
   SearchForm,
   Genres,
   MovieTile,
-  MovieDetails,
   SortControl,
   AddMovie,
 } from './components';
 import './App.scss';
-import { genres, movies } from './constants';
+import { genres } from './constants';
 import { MovieDetailsProps } from './models';
 import axios from 'axios';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 const App: React.FC = () => {
   // @TODO Add more proper layout styles
@@ -21,16 +20,16 @@ const App: React.FC = () => {
   // @TODO convert runtime to hh:mm format
 
   const [movies, setMovies] = useState<MovieDetailsProps[]>([]);
-  const [selectedMovie, setSelectedMovie] = useState<MovieDetailsProps | null>(
-    null
-  );
-  const [sortBy, setSortBy] = useState('title');
-  const [sortOrder, setSortOrder] = useState('desc');
-  const [selectedGenre, setSelectedGenre] = useState<string>(genres[0]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const searchQuery = searchParams.get('query') || '';
+  const sortBy = searchParams.get('sortBy') || 'title';
+  const sortOrder = searchParams.get('sortOrder') || 'desc';
+  const selectedGenre = searchParams.get('genre') || 'All';
 
   const BACKEND_URL = 'http://localhost:4000/movies';
 
@@ -43,7 +42,7 @@ const App: React.FC = () => {
         sortBy,
         sortOrder,
         search: searchQuery,
-        searchBy: sortBy,
+        searchBy: 'title',
         filter: selectedGenre !== 'All' ? selectedGenre : '',
         limit: selectedGenre === 'All' ? '300' : '10',
         offset: '0',
@@ -63,24 +62,6 @@ const App: React.FC = () => {
     fetchMovies();
   }, [sortBy, sortOrder, searchQuery, selectedGenre]);
 
-  const handleMovieClick = (id: number) => {
-    const movie =
-      movies.find((movie) => {
-        if (movie.id === id) {
-          return {
-            poster_path: movie.poster_path,
-            title: movie.title,
-            release_date: movie.release_date,
-            vote_average: movie.vote_average,
-            runtime: movie.runtime,
-            overview: movie.overview,
-          };
-        }
-      }) || null;
-
-    setSelectedMovie(movie);
-  };
-
   const handleAddMovie = async (movie: MovieDetailsProps) => {
     // @TODO movie addition logic
     console.log('Add movie:', movie);
@@ -97,29 +78,30 @@ const App: React.FC = () => {
   };
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query);
+    setSearchParams({ query, sortBy, sortOrder, genre: selectedGenre });
   };
 
-  const handleSortChange = (newValue: string) => {
-    setSortBy(newValue);
+  const handleSortChange = (newSortBy: string) => {
+    setSearchParams({
+      query: searchQuery,
+      sortBy: newSortBy,
+      sortOrder,
+      genre: selectedGenre,
+    });
   };
 
   const handleGenreSelect = (genre: string) => {
-    setSelectedGenre(genre);
+    setSearchParams({ query: searchQuery, sortBy, sortOrder, genre });
   };
 
+  const handleMovieClick = (id: number) => {
+    navigate(`/${id}?${searchParams.toString()}`);
+  };
+  
   const renderContent = () => {
-    if (loading) {
-      return <p>Loading movies...</p>;
-    }
-
-    if (error) {
-      return <p>Error: {error}</p>;
-    }
-
-    if (movies.length === 0) {
-      return <p>No movies found.</p>;
-    }
+    if (loading) return <p>Loading movies...</p>;
+    if (error) return <p>Error: {error}</p>;
+    if (movies.length === 0) return <p>No movies found.</p>;
 
     return (
       <div className="grid-container">
@@ -131,7 +113,7 @@ const App: React.FC = () => {
             title={movie.title}
             release_date={movie.release_date}
             genres={movie.genres}
-            onClick={handleMovieClick}
+            onClick={(id) => handleMovieClick(id)}
             onEdit={handleEditMovie}
             onDelete={handleDeleteMovie}
           />
@@ -144,25 +126,7 @@ const App: React.FC = () => {
     <>
       <AddMovie onSubmit={handleAddMovie} />
 
-      <SearchForm
-        initialSearchQuery="Initial search value"
-        onSearch={handleSearch}
-      />
-
-      {selectedMovie && (
-        <div style={{ flex: '1', padding: '20px', background: '#f8f8f8' }}>
-          <MovieDetails
-            id={selectedMovie.id}
-            poster_path={selectedMovie.poster_path}
-            title={selectedMovie.title}
-            genres={selectedMovie.genres}
-            release_date={selectedMovie.release_date}
-            vote_average={selectedMovie.vote_average}
-            runtime={selectedMovie.runtime}
-            overview={selectedMovie.overview}
-          />
-        </div>
-      )}
+      <SearchForm onSearch={handleSearch} initialSearchQuery={searchQuery} />
 
       <Genres
         genres={genres}
@@ -172,6 +136,7 @@ const App: React.FC = () => {
 
       <SortControl currentSelection={sortBy} onChange={handleSortChange} />
 
+      <Outlet />
       {renderContent()}
     </>
   );
