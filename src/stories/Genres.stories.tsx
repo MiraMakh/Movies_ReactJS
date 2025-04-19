@@ -12,15 +12,15 @@ const meta: Meta<typeof Genres> = {
   argTypes: {
     genres: {
       control: { type: 'object' },
-      description: 'Array of genre names to display as buttons',
+      overview: 'Array of genre names to display as buttons',
     },
     selectedGenre: {
       control: { type: 'text' },
-      description: 'The currently selected genre',
+      overview: 'The currently selected genre',
     },
     onSelect: {
       action: 'onSelect',
-      description: 'Callback triggered when a genre is selected',
+      overview: 'Callback triggered when a genre is selected',
     },
   },
 };

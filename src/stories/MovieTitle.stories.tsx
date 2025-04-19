@@ -12,41 +12,41 @@ const meta: Meta<typeof MovieTile> = {
   argTypes: {
     id: {
       control: { type: 'number' },
-      description: 'The unique ID of the movie tile.',
+      overview: 'The unique ID of the movie tile.',
     },
-    imageUrl: {
+    poster_path: {
       control: { type: 'text' },
-      description: 'Poster image URL of the movie.',
+      overview: 'Poster image URL of the movie.',
     },
     title: {
       control: { type: 'text' },
-      description: 'Title of the movie displayed on the tile.',
+      overview: 'Title of the movie displayed on the tile.',
     },
-    releaseYear: {
+    release_date: {
       control: { type: 'number' },
-      description: 'The release year of the movie.',
+      overview: 'The release year of the movie.',
     },
     genres: {
       control: { type: 'object' },
-      description: 'A list of genres associated with the movie.',
+      overview: 'A list of genres associated with the movie.',
     },
     onClick: {
       action: 'onClick',
-      description: 'Callback triggered when the tile is clicked.',
+      overview: 'Callback triggered when the tile is clicked.',
     },
     onEdit: {
       action: 'onEdit',
-      description:
+      overview:
         'Callback triggered when "Edit" is clicked in the context menu.',
     },
     onDelete: {
       action: 'onDelete',
-      description:
+      overview:
         'Callback triggered when "Delete" is clicked in the context menu.',
     },
     isActive: {
       control: { type: 'boolean' },
-      description: 'Indicates whether the tile is active.',
+      overview: 'Indicates whether the tile is active.',
     },
   },
 };
@@ -56,9 +56,9 @@ export default meta;
 type Story = StoryObj<MovieTileProps>;
 const movie = {
   id: 1,
-  imageUrl: `./src/assets/Bitmap.png`,
+  poster_path: `./src/assets/Bitmap.png`,
   title: 'Movie title',
-  releaseYear: 2010,
+  release_date: 2010,
   genres: ['Documentary', 'Horror'],
 };
 

@@ -12,7 +12,7 @@ const meta: Meta<typeof SortControl> = {
     currentSelection: {
       control: { type: 'radio' },
       options: ['Release Date', 'Title'],
-      description: 'Tracks the currently selected sorting option',
+      overview: 'Tracks the currently selected sorting option',
     },
     onChange: { action: 'onChange' },
   },

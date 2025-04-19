@@ -7,6 +7,7 @@ const Genres = ({ genres, selectedGenre, onSelect }: GenresProps) => {
     <div className={styles['genres']}>
       {genres.map((genre) => (
         <button
+          type="button"
           key={genre}
           onClick={() => onSelect(genre)}
           className={clsx(styles['genres__button'], {
