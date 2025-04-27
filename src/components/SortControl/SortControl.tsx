@@ -19,8 +19,8 @@ const SortControl = ({ currentSelection, onChange }: SortControlProps) => {
         onChange={handleSelectChange}
         className={styles.sortControl__select}
       >
-        <option value="Release Date">Release Date</option>
-        <option value="Title">Title</option>
+        <option value="title">Title</option>
+        <option value="genres">Genres</option>
       </select>
     </div>
   );

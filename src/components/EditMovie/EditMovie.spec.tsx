@@ -6,13 +6,14 @@ import { MovieDetailsProps } from '../../models';
 describe('EditMovie Component', () => {
   const mockOnSubmit = jest.fn();
   const sampleMovie: MovieDetailsProps = {
+    id: 123,
     title: 'Inception',
-    releaseYear: 17,
-    imageUrl: 'test',
-    rating: 8.8,
-    genre: 'Sci-Fi',
-    duration: '148',
-    description: 'test',
+    release_date: 17,
+    poster_path: 'test',
+    vote_average: 8.8,
+    genres: 'Sci-Fi',
+    runtime: 148,
+    overview: 'test',
   };
 
   const renderComponent = () =>
