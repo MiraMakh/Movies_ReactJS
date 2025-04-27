@@ -11,7 +11,7 @@ const meta: Meta<typeof Counter> = {
   argTypes: {
     initialValue: {
       control: { type: 'number' },
-      description: 'Initial value for the counter',
+      overview: 'Initial value for the counter',
     },
   },
 };

@@ -1,8 +1,8 @@
 export interface MovieTileProps {
   id: number;
-  imageUrl: string;
+  poster_path: string;
   title: string;
-  releaseYear: number;
+  release_date: number;
   genres: string[];
   onClick: (id: number) => void;
   onEdit?: (id: number) => void;
@@ -11,13 +11,18 @@ export interface MovieTileProps {
 }
 
 export interface MovieDetailsProps {
-  imageUrl: string;
+  id?: number;
+  poster_path: string;
   title: string;
-  genre?: string;
-  releaseYear: number;
-  rating: number;
-  duration: string /* @TODO: change with number when BE will be added */;
-  description: string;
+  genres: string[];
+  release_date: string;
+  vote_average: number;
+  runtime: number;
+  overview: string;
+  budget?: number;
+  tagline?: string;
+  vote_count?: number;
+  revenue?: number;
 }
 
 export interface MovieFormProps {
@@ -28,6 +33,7 @@ export interface MovieFormProps {
 export interface AddMovieProps {
   onSubmit: (movie: MovieDetailsProps) => void;
 }
+
 export interface EditMovieProps {
   initialMovie: MovieDetailsProps;
   onSubmit: (movie: MovieDetailsProps) => void;

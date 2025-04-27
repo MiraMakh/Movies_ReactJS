@@ -7,9 +7,9 @@ import { movies } from '../../constants';
 const movie = movies[0];
 const defaultProps: MovieTileProps = {
   id: movie.id,
-  imageUrl: movie.imageUrl,
+  poster_path: movie.poster_path,
   title: movie.title,
-  releaseYear: movie.releaseYear,
+  release_date: movie.release_date,
   genres: movie.genres,
   onClick: jest.fn(),
   onEdit: jest.fn(),
@@ -23,12 +23,12 @@ describe('MovieTile Component', () => {
 
     expect(screen.getByText(movie.title)).toBeInTheDocument();
     expect(
-      screen.getByText(`${movie.releaseYear} ・ ${movie.genres.join(', ')}`)
+      screen.getByText(`${movie.release_date} ・ ${movie.genres.join(', ')}`)
     ).toBeInTheDocument();
 
     const image = screen.getByAltText(movie.title);
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', movie.imageUrl);
+    expect(image).toHaveAttribute('src', movie.poster_path);
   });
 
   it('should handle click events', async () => {

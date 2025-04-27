@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EditMovieProps } from '../../models';
 import Dialog from '../Dialog/Dialog';
 import MovieForm from '../MovieForm/MovieForm';
 
-const EditMovie = ({ initialMovie, onSubmit }: EditMovieProps) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const handleClose = () => {
-    setIsDialogOpen(false);
-  };
-
+/* @TODO: update unit tests */
+const EditMovie = ({ initialMovie, onSubmit, isDialogOpen, onClose }: EditMovieProps & { isDialogOpen: boolean; onClose: () => void }) => {
   return (
     <>
-      <button onClick={() => setIsDialogOpen(true)}>Edit Movie</button>
-
       {isDialogOpen && (
-        <Dialog title={'Edit Movie'} onClose={handleClose}>
+        <Dialog title={'Edit Movie'} onClose={onClose}>
           <MovieForm
             initialMovie={initialMovie}
             onSubmit={(movie) => {
               onSubmit(movie);
-              handleClose();
+              onClose();
             }}
           />
         </Dialog>
