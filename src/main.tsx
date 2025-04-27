@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
-import { MovieDetails } from './components';
+import { AddMovie, EditMovie, MovieDetails } from './components';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +19,11 @@ const router = createBrowserRouter([
         path: '/:id',
         element: <MovieDetails />,
       },
+      {
+        path: '/new',
+        element: <AddMovie />,
+      },
+      { path: '/:id/edit', element: <EditMovie /> },
     ],
   },
 ]);

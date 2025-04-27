@@ -1,135 +1,203 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React from 'react';
 import './MovieForm.scss';
-import { MovieDetailsProps, MovieFormProps } from '../../models';
+import { MovieFormProps, MovieFormInputs } from '../../models';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-/* @TODO: Add unit tests */
 const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
-  const [formValues, setFormValues] = useState<MovieDetailsProps>({
-    id: initialMovie?.id || 0,
-    title: initialMovie?.title || '',
-    release_date: initialMovie?.release_date || 0,
-    poster_path: initialMovie?.poster_path || '',
-    vote_average: initialMovie?.vote_average || 0,
-    genres: initialMovie?.genres || '',
-    runtime: initialMovie?.runtime || '',
-    overview: initialMovie?.overview || '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<MovieFormInputs>({
+    defaultValues: {
+      title: initialMovie?.title || '',
+      tagline: initialMovie?.tagline || '',
+      vote_average: initialMovie?.vote_average || 0,
+      vote_count: initialMovie?.vote_count || 0,
+      release_date: initialMovie?.release_date || '',
+      poster_path: initialMovie?.poster_path || '',
+      overview: initialMovie?.overview || '',
+      budget: initialMovie?.budget || 0,
+      revenue: initialMovie?.revenue || 0,
+      runtime: initialMovie?.runtime || 0,
+      genres: Array.isArray(initialMovie?.genres)
+        ? initialMovie.genres.join(', ')
+        : initialMovie?.genres || '',
+    },
   });
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
+  const onSubmitHandler: SubmitHandler<MovieFormInputs> = (data) => {
+    const genresArray = Array.isArray(data.genres)
+      ? data.genres
+      : data.genres
+          .split(',')
+          .map((genre) => genre.trim())
+          .filter((genre) => genre !== '');
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+    const transformedData = {
+      ...data,
+      vote_average: Number(data.vote_average),
+      vote_count: Number(data.vote_count),
+      budget: Number(data.budget),
+      revenue: Number(data.revenue),
+      runtime: Number(data.runtime),
+      genres: genresArray,
+    };
 
-    if (!formValues.title || !formValues.poster_path) {
-      alert('Please fill out all required fields (TITLE, IMAGE URL).');
-      return;
-    }
-
-    onSubmit(formValues);
+    onSubmit(transformedData);
   };
 
   return (
-    <form className="movie-form" onSubmit={handleSubmit}>
+    <form className="movie-form" onSubmit={handleSubmit(onSubmitHandler)}>
       <div className="form-line">
         <div className="form-group">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Title *</label>
           <input
             type="text"
             id="title"
-            name="title"
-            value={formValues.title}
-            onChange={handleInputChange}
+            {...register('title', { required: 'Title is required' })}
             placeholder="Enter movie title"
-            required
           />
+          {errors.title && <p className="error">{errors.title.message}</p>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="releaseDate">Release Date</label>
-          <input
-            type="date"
-            id="releaseDate"
-            name="releaseDate"
-            value={formValues.release_date}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-      </div>
-      <div className="form-line">
-        <div className="form-group">
-          <label htmlFor="movieUrl">Movie URL</label>
-          <input
-            type="url"
-            id="movieUrl"
-            name="movieUrl"
-            value={formValues.poster_path}
-            onChange={handleInputChange}
-            placeholder="Enter movie poster URL"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="vote_average">Rating</label>
-          <input
-            type="number"
-            id="vote_average"
-            name="vote_average"
-            value={formValues.vote_average}
-            onChange={handleInputChange}
-            placeholder="Enter movie vote_average"
-            min="0"
-            max="10"
-          />
-        </div>
-      </div>
-      <div className="form-line">
-        <div className="form-group">
-          <label htmlFor="genre">Genre</label>
+          <label htmlFor="tagline">Tagline *</label>
           <input
             type="text"
-            id="genre"
-            name="genre"
-            value={formValues.genre}
-            onChange={handleInputChange}
-            placeholder="Enter genre"
+            id="tagline"
+            {...register('tagline', { required: 'Tagline is required' })}
+            placeholder="Enter the tagline"
           />
+          {errors.tagline && <p className="error">{errors.tagline.message}</p>}
+        </div>
+      </div>
+      <div className="form-line">
+        <div className="form-group">
+          <label htmlFor="vote_average">Vote Average *</label>
+          <input
+            type="number"
+            step="0.1"
+            id="vote_average"
+            {...register('vote_average', {
+              required: 'Vote Average is required',
+              min: { value: 0, message: 'Vote Average must be at least 0' },
+              max: { value: 10, message: 'Vote Average cannot exceed 10' },
+            })}
+            placeholder="Enter the average vote"
+          />
+          {errors.vote_average && (
+            <p className="error">{errors.vote_average.message}</p>
+          )}
         </div>
 
         <div className="form-group">
-          <label htmlFor="runtime">Runtime</label>
+          <label htmlFor="vote_count">Vote Count *</label>
+          <input
+            type="number"
+            id="vote_count"
+            {...register('vote_count', { required: 'Vote Count is required' })}
+            placeholder="Enter the vote count"
+          />
+          {errors.vote_count && (
+            <p className="error">{errors.vote_count.message}</p>
+          )}
+        </div>
+      </div>
+      <div className="form-line">
+        <div className="form-group">
+          <label htmlFor="release_date">Release Date *</label>
+          <input
+            type="date"
+            id="release_date"
+            {...register('release_date', {
+              required: 'Release Date is required',
+            })}
+          />
+          {errors.release_date && (
+            <p className="error">{errors.release_date.message}</p>
+          )}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="poster_path">Poster Path *</label>
+          <input
+            type="url"
+            id="poster_path"
+            {...register('poster_path', {
+              required: 'Poster Path is required',
+            })}
+            placeholder="Enter the poster URL"
+          />
+          {errors.poster_path && (
+            <p className="error">{errors.poster_path.message}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="form-line">
+        <div className="form-group">
+          <label htmlFor="budget">Budget *</label>
+          <input
+            type="number"
+            id="budget"
+            {...register('budget', { required: 'Budget is required' })}
+            placeholder="Enter the budget amount"
+            min="0"
+          />
+          {errors.budget && <p className="error">{errors.budget.message}</p>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="revenue">Revenue *</label>
+          <input
+            type="number"
+            id="revenue"
+            {...register('revenue', { required: 'Revenue is required' })}
+            placeholder="Enter the revenue amount"
+            min="0"
+          />
+          {errors.revenue && <p className="error">{errors.revenue.message}</p>}
+        </div>
+      </div>
+      <div className="form-line">
+        <div className="form-group">
+          <label htmlFor="runtime">Runtime (minutes) *</label>
           <input
             type="number"
             id="runtime"
-            name="runtime"
-            value={formValues.runtime}
-            onChange={handleInputChange}
-            placeholder="Enter runtime in minutes"
-            min="0"
+            {...register('runtime', {
+              required: 'Runtime is required',
+              min: { value: 1, message: 'Runtime must be at least 1 minute' },
+            })}
+            placeholder="Enter movie runtime in minutes"
           />
+          {errors.runtime && <p className="error">{errors.runtime.message}</p>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="genres">Genres *</label>
+          <input
+            type="text"
+            id="genres"
+            {...register('genres', {
+              required: 'Genres are required',
+            })}
+            placeholder="Enter genres (comma-separated)"
+          />
+          {errors.genres && <p className="error">{errors.genres.message}</p>}
         </div>
       </div>
       <div className="form-group">
-        <label htmlFor="overview">Overview</label>
+        <label htmlFor="overview">Overview *</label>
         <textarea
           id="overview"
-          name="overview"
-          value={formValues.overview}
-          onChange={handleInputChange}
+          {...register('overview', { required: 'Overview is required' })}
           placeholder="Enter movie overview"
           rows={4}
         />
+        {errors.overview && <p className="error">{errors.overview.message}</p>}
       </div>
-
       <div className="form-actions">
         <button type="submit">Submit</button>
       </div>

@@ -5,6 +5,7 @@ import {
   MovieTile,
   SortControl,
   AddMovie,
+  EditMovie,
 } from './components';
 import './App.scss';
 import { genres } from './constants';
@@ -32,6 +33,11 @@ const App: React.FC = () => {
   const selectedGenre = searchParams.get('genre') || 'All';
 
   const BACKEND_URL = 'http://localhost:4000/movies';
+
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editingMovie, setEditingMovie] = useState<MovieDetailsProps | null>(
+    null
+  );
 
   const fetchMovies = async () => {
     setLoading(true);
@@ -63,13 +69,45 @@ const App: React.FC = () => {
   }, [sortBy, sortOrder, searchQuery, selectedGenre]);
 
   const handleAddMovie = async (movie: MovieDetailsProps) => {
-    // @TODO movie addition logic
-    console.log('Add movie:', movie);
+    console.log(movie);
+    try {
+      const response = await axios.post(`${BACKEND_URL}`, movie);
+
+      setMovies((prevMovies) => [...prevMovies, response.data]);
+      navigate(`/`, { replace: true });
+    } catch (error) {
+      console.error('Error adding movie:', error);
+      alert('Failed to add movie. Please try again.');
+    }
   };
 
   const handleEditMovie = async (id: number) => {
-    // @TODO movie edit logic
-    console.log('Edit movie ID:', id);
+    try {
+      const response = await axios.get(`${BACKEND_URL}/${id}`);
+
+      setEditingMovie(response.data);
+      setIsEditDialogOpen(true);
+    } catch (error) {
+      console.error('Error fetching movie for editing:', error);
+      alert('Failed to fetch movie details.');
+    }
+  };
+
+  const handleEditSubmit = async (updatedMovie: MovieDetailsProps) => {
+    try {
+      const response = await axios.put(`${BACKEND_URL}`, updatedMovie);
+
+      setMovies((prevMovies) =>
+        prevMovies.map((movie) =>
+          movie.id === updatedMovie.id ? response.data : movie
+        )
+      );
+      setIsEditDialogOpen(false);
+      setEditingMovie(null);
+    } catch (error) {
+      console.error('Error updating movie:', error);
+      alert('Failed to update movie. Please try again.');
+    }
   };
 
   const handleDeleteMovie = async (id: number) => {
@@ -97,7 +135,7 @@ const App: React.FC = () => {
   const handleMovieClick = (id: number) => {
     navigate(`/${id}?${searchParams.toString()}`);
   };
-  
+
   const renderContent = () => {
     if (loading) return <p>Loading movies...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -114,7 +152,7 @@ const App: React.FC = () => {
             release_date={movie.release_date}
             genres={movie.genres}
             onClick={(id) => handleMovieClick(id)}
-            onEdit={handleEditMovie}
+            onEdit={(id) => handleEditMovie(id)}
             onDelete={handleDeleteMovie}
           />
         ))}
@@ -138,6 +176,18 @@ const App: React.FC = () => {
 
       <Outlet />
       {renderContent()}
+
+      <EditMovie
+        initialMovie={editingMovie}
+        onSubmit={(movie) =>
+          handleEditSubmit({ ...movie, id: editingMovie.id })
+        }
+        isDialogOpen={isEditDialogOpen}
+        onClose={() => {
+          navigate('/');
+          setIsEditDialogOpen(false);
+        }}
+      />
     </>
   );
 };
