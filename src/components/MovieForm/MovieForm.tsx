@@ -5,13 +5,14 @@ import { MovieDetailsProps, MovieFormProps } from '../../models';
 /* @TODO: Add unit tests */
 const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
   const [formValues, setFormValues] = useState<MovieDetailsProps>({
+    id: initialMovie?.id || 0,
     title: initialMovie?.title || '',
-    releaseYear: initialMovie?.releaseYear || 0,
-    imageUrl: initialMovie?.imageUrl || '',
-    rating: initialMovie?.rating || 0,
-    genre: initialMovie?.genre || '',
-    duration: initialMovie?.duration || '',
-    description: initialMovie?.description || '',
+    release_date: initialMovie?.release_date || 0,
+    poster_path: initialMovie?.poster_path || '',
+    vote_average: initialMovie?.vote_average || 0,
+    genres: initialMovie?.genres || '',
+    runtime: initialMovie?.runtime || '',
+    overview: initialMovie?.overview || '',
   });
 
   const handleInputChange = (
@@ -27,7 +28,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!formValues.title || !formValues.imageUrl) {
+    if (!formValues.title || !formValues.poster_path) {
       alert('Please fill out all required fields (TITLE, IMAGE URL).');
       return;
     }
@@ -57,7 +58,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
             type="date"
             id="releaseDate"
             name="releaseDate"
-            value={formValues.releaseYear}
+            value={formValues.release_date}
             onChange={handleInputChange}
             required
           />
@@ -70,7 +71,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
             type="url"
             id="movieUrl"
             name="movieUrl"
-            value={formValues.imageUrl}
+            value={formValues.poster_path}
             onChange={handleInputChange}
             placeholder="Enter movie poster URL"
             required
@@ -78,14 +79,14 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="rating">Rating</label>
+          <label htmlFor="vote_average">Rating</label>
           <input
             type="number"
-            id="rating"
-            name="rating"
-            value={formValues.rating}
+            id="vote_average"
+            name="vote_average"
+            value={formValues.vote_average}
             onChange={handleInputChange}
-            placeholder="Enter movie rating"
+            placeholder="Enter movie vote_average"
             min="0"
             max="10"
           />
@@ -110,7 +111,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
             type="number"
             id="runtime"
             name="runtime"
-            value={formValues.duration}
+            value={formValues.runtime}
             onChange={handleInputChange}
             placeholder="Enter runtime in minutes"
             min="0"
@@ -122,7 +123,7 @@ const MovieForm = ({ initialMovie, onSubmit }: MovieFormProps) => {
         <textarea
           id="overview"
           name="overview"
-          value={formValues.description}
+          value={formValues.overview}
           onChange={handleInputChange}
           placeholder="Enter movie overview"
           rows={4}

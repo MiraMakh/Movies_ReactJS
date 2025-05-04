@@ -12,7 +12,9 @@ const EditMovie = ({ initialMovie, onSubmit }: EditMovieProps) => {
 
   return (
     <>
-      <button onClick={() => setIsDialogOpen(true)}>Edit Movie</button>
+      <button type="button" onClick={() => setIsDialogOpen(true)}>
+        Edit Movie
+      </button>
 
       {isDialogOpen && (
         <Dialog title={'Edit Movie'} onClose={handleClose}>

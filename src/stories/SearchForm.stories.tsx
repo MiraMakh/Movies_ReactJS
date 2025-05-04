@@ -11,11 +11,11 @@ const meta: Meta<typeof SearchForm> = {
   argTypes: {
     initialSearchQuery: {
       control: { type: 'text' },
-      description: 'Initial query to prefill the search box',
+      overview: 'Initial query to prefill the search box',
     },
     onSearch: {
       action: 'onSearch',
-      description: 'Callback function triggered when clicking search',
+      overview: 'Callback function triggered when clicking search',
     },
   },
 };

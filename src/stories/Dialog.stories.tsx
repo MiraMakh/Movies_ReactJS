@@ -12,15 +12,15 @@ const meta: Meta<typeof Dialog> = {
   argTypes: {
     title: {
       control: 'text',
-      description: 'The title displayed in the dialog header',
+      overview: 'The title displayed in the dialog header',
     },
     children: {
       control: 'text',
-      description: 'Content inside the dialog body',
+      overview: 'Content inside the dialog body',
     },
     onClose: {
       action: 'onClose',
-      description: 'Callback for closing the dialog',
+      overview: 'Callback for closing the dialog',
     },
   },
 };
@@ -39,7 +39,11 @@ export const Interactive: StoryFn<DialogProps> = (args) => {
   const [isOpen, setIsOpen] = useState(true);
 
   if (!isOpen)
-    return <button onClick={() => setIsOpen(true)}>Open Dialog</button>;
+    return (
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open Dialog
+      </button>
+    );
 
   return (
     <Dialog
