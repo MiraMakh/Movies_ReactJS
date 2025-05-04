@@ -12,7 +12,9 @@ const AddMovie = ({ onSubmit }: AddMovieProps) => {
 
   return (
     <>
-      <button type="button" onClick={() => setIsDialogOpen(true)}>Add Movie</button>
+      <button type="button" onClick={() => setIsDialogOpen(true)}>
+        Add Movie
+      </button>
       {isDialogOpen && (
         <Dialog title={'Add Movie'} onClose={handleClose}>
           <MovieForm

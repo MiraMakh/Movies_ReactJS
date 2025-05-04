@@ -10,7 +10,7 @@ const MovieDetails: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const BACKEND_URL = 'http://localhost:4000/movies';
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -26,9 +26,7 @@ const MovieDetails: React.FC = () => {
       }
     };
 
-    if (id) {
-      fetchMovieDetails();
-    }
+    fetchMovieDetails();
   }, [id]);
 
   if (loading) return <p>Loading movie details...</p>;
@@ -38,7 +36,11 @@ const MovieDetails: React.FC = () => {
   return (
     <div className={styles.movieDetails}>
       <div className={styles.movieDetails__poster}>
-        <img src={movie.poster_path} alt={movie.title} className={styles.movieDetails__image} />
+        <img
+          src={movie.poster_path}
+          alt={movie.title}
+          className={styles.movieDetails__image}
+        />
       </div>
       <div className={styles.movieDetails__info}>
         <h1 className={styles.movieDetails__title}>{movie.title}</h1>

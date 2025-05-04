@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import MovieDetails from './MovieDetails';
 import { MovieDetailsProps } from '../../models';
 
+/* @TODO: solve  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL; issue in unit test*/
 describe('MovieDetails Component', () => {
   const defaultProps: MovieDetailsProps = {
     id: 123,
@@ -16,7 +17,7 @@ describe('MovieDetails Component', () => {
   };
 
   it('should render the movie details', () => {
-    render(<MovieDetails {...defaultProps} />);
+    render(<MovieDetails />);
 
     const title = screen.getByText(defaultProps.title);
     expect(title).toBeInTheDocument();

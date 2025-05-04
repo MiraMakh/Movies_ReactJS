@@ -48,8 +48,12 @@ const MovieTile = ({
       </button>
       {isContextMenuOpen && (
         <div className={styles.movieTile__contextMenu}>
-          <button type="button" onClick={handleEditClick}>Edit</button>
-          <button type="button" onClick={handleDeleteClick}>Delete</button>
+          <button type="button" onClick={handleEditClick}>
+            Edit
+          </button>
+          <button type="button" onClick={handleDeleteClick}>
+            Delete
+          </button>
         </div>
       )}
     </div>

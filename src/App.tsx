@@ -31,7 +31,7 @@ const App: React.FC = () => {
   const sortOrder = searchParams.get('sortOrder') || 'desc';
   const selectedGenre = searchParams.get('genre') || 'All';
 
-  const BACKEND_URL = 'http://localhost:4000/movies';
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const fetchMovies = async () => {
     setLoading(true);
@@ -97,7 +97,7 @@ const App: React.FC = () => {
   const handleMovieClick = (id: number) => {
     navigate(`/${id}?${searchParams.toString()}`);
   };
-  
+
   const renderContent = () => {
     if (loading) return <p>Loading movies...</p>;
     if (error) return <p>Error: {error}</p>;

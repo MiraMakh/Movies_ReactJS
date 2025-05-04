@@ -39,7 +39,11 @@ export const Interactive: StoryFn<DialogProps> = (args) => {
   const [isOpen, setIsOpen] = useState(true);
 
   if (!isOpen)
-    return <button type="button" onClick={() => setIsOpen(true)}>Open Dialog</button>;
+    return (
+      <button type="button" onClick={() => setIsOpen(true)}>
+        Open Dialog
+      </button>
+    );
 
   return (
     <Dialog

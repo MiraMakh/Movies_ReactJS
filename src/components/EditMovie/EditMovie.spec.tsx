@@ -3,6 +3,37 @@ import userEvent from '@testing-library/user-event';
 import EditMovie from './EditMovie';
 import { MovieDetailsProps } from '../../models';
 
+jest.mock('../Dialog/Dialog', () => {
+  return ({ title, onClose, children }: any) => (
+    <div>
+      <h1>{title}</h1>
+      {children}
+      <button aria-label="Close dialog" onClick={onClose}>
+        Close
+      </button>
+    </div>
+  );
+});
+
+jest.mock('../MovieForm/MovieForm', () => {
+  return ({ initialMovie, onSubmit }: any) => (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit({ ...initialMovie, title: 'Edited Inception' });
+      }}
+    >
+      <input
+        type="text"
+        name="title"
+        placeholder="Movie Title"
+        defaultValue={initialMovie.title}
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+});
+
 describe('EditMovie Component', () => {
   const mockOnSubmit = jest.fn();
   const sampleMovie: MovieDetailsProps = {
@@ -56,5 +87,24 @@ describe('EditMovie Component', () => {
     ).not.toBeInTheDocument();
   });
 
-  /* @TODO: Add sumbit data test */
+  it('Should submit the edited movie data and close the dialog', async () => {
+    const user = userEvent.setup();
+    renderComponent();
+
+    const editButton = screen.getByRole('button', { name: 'Edit Movie' });
+    await user.click(editButton);
+
+    const submitButton = screen.getByRole('button', { name: 'Submit' });
+    await user.click(submitButton);
+
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      ...sampleMovie,
+      title: 'Edited Inception',
+    });
+
+    expect(
+      screen.queryByRole('heading', { name: 'Edit Movie' })
+    ).not.toBeInTheDocument();
+  });
 });
